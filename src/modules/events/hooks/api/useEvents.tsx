@@ -1,14 +1,8 @@
 import ApiRoutes from '@common/defs/apiRoutes';
-import { ROLE } from '@modules/permissions/defs/types';
-import { User } from '@modules/users/defs/types';
-import useItems, { UseItems, UseItemsOptions, defaultOptions } from '@common/hooks/useItems';
-import useApi, { ApiOptions, ApiResponse, FetchApiOptions } from '@common/hooks/useApi';
-import { mutate } from 'swr';
-import useSWR from 'swr';
-import { useState } from 'react';
-import useAuth from '@modules/auth/hooks/api/useAuth';
+import useApi, { FetchApiOptions } from '@common/hooks/useApi';
 import { useRouter } from 'next/router';
 import Routes from '@common/defs/routes';
+import Common from '@common/defs/routes';
 
 export interface CreateOneEvent {
   name: string;
@@ -37,24 +31,9 @@ export interface CreateOneReservation {
   user_id: Number,
   event_id: Number
 }
-// export type UpsertOneInput = CreateOneInput | UpdateOneInput;
 
-// const useUsers: UseItems<User, CreateOneInput, UpdateOneInput> = (
-//   opts: UseItemsOptions = defaultOptions
-// ) => {
-//   const apiRoutes = ApiRoutes.Users;
-//   const useItemsHook = useItems<User, CreateOneInput, UpdateOneInput>(apiRoutes, opts);
-//   return useItemsHook;
-// };
-// interface AuthData {
-//   user: User | null;
-//   updateProfile: (
-//     _input: UpdateOneInput,
-//     _options?: FetchApiOptions
-//   ) => Promise<ApiResponse<{ token: string }>>;
-// }
 
-const useEvents = (logout: any): any => {
+const useEvents = (user: any, logout: any): any => {
   var router = useRouter();
   const fetchApi = useApi();
   const getAllEvents = async (options?: FetchApiOptions) => {
@@ -90,7 +69,11 @@ const useEvents = (logout: any): any => {
       method: "DELETE",
       ...options,
     });
-    router.push(Routes.Events.ReadAll)
+    if (user.rolesNames[0] == "admin") {
+      router.push(Routes.Common.Home)
+    } else {
+      router.push(Routes.Events.ReadAll)
+    }
   };
 
 

@@ -1,10 +1,8 @@
-import ApiRoutes from '@common/defs/apiRoutes';
 import useAuth from '@modules/auth/hooks/api/useAuth';
 import useEvents from '@modules/events/hooks/api/useEvents';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Routes from '@common/defs/routes';
-import { SortGridMenuItems } from '@mui/x-data-grid-premium';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -41,10 +39,10 @@ export default function EventsReader() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const { getAllEvents, DeleteEvent } = useEvents();
+  var { user } = useAuth();
+  const { getAllEvents, DeleteEvent } = useEvents(user);
   const [events, setEvents] = useState([]);
   var router = useRouter();
-  var { user } = useAuth();
   useEffect(() => {
     console.log(user)
     const fetchData = async () => {

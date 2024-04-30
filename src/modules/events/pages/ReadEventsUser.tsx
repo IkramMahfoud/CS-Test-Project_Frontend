@@ -78,16 +78,6 @@ export default function ReadEventsUser() {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2%' }}>
         {(events && events.length > 0) ? (
           events.map((e) => (
-            // <div style={{ border: "1px solid black", margin: "10px" }} key={e.id}>
-            //   {/* Assuming e.id is a unique identifier */}
-            //   <img style={{ width: "180px", height: "200px" }} src="https://cdn-icons-png.flaticon.com/512/1055/1055650.png" alt="" />
-            //   <h1 onClick={() => { router.push(`${Routes.Common.Events}/${e.id}${Routes.Events.ReadOne}`) }}>{e.name}</h1>
-            //   <span>{e.description}</span>
-            //   <h1>{e.user.name}</h1>
-            //   <button>now more</button>
-            //   <button onClick={() => deleteEvent(e)}>cancel</button>
-            //   <button onClick={() => { router.push(`${Routes.Common.Events}/${e.id}${Routes.Events.UpdateOne}`) }}>update</button>
-            // </div>
             <Card sx={{ maxWidth: 280 }}>
               <CardHeader
                 action={

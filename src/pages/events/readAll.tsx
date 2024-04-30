@@ -24,7 +24,6 @@ const readAll: NextPage = () => {
       {user?.rolesNames[0] === 'admin' ? (
         <>
           <PageHeader title="Tous les événements" />
-          {/* <Button onClick={() => router.push(Routes.Events.CreateOne)}>Ajouter un événement</Button> */}
           <ReadEventsAdmin />
         </>
       ) : (

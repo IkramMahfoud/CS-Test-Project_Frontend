@@ -1,4 +1,3 @@
-import ApiRoutes from '@common/defs/apiRoutes';
 import useAuth from '@modules/auth/hooks/api/useAuth';
 import useEvents from '@modules/events/hooks/api/useEvents';
 import { useRouter } from 'next/router';
@@ -79,7 +78,6 @@ export default function ReadOneEvent({ id }) {
   }
   return (
     <div>
-
 
       {event && (
         <>

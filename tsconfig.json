@@ -48,7 +48,8 @@
     "next.config.js",
     "src/modules/users/pages/UpdateProfileForm.tsx",
     "src/modules/events/pages/EventsReader.tsx",
-    "src/modules/events/pages/UpdateOneEvent.tsx"
+    "src/modules/events/pages/UpdateOneEvent.tsx",
+    "src/common/layout/Topbar.tsx"
   ],
   "exclude": [
     "node_modules"

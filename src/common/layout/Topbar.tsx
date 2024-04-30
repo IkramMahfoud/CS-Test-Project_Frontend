@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAuth from '@modules/auth/hooks/api/useAuth';
 import Stack from '@mui/material/Stack';
 import Logo from '@common/assets/svgs/Logo';
@@ -249,23 +249,27 @@ const Topbar = () => {
               </>
             ) : (
               <>
-                <Button
-                  onClick={() => router.push(Routes.Common.Profile)}
-                  sx={{
-                    display: { xs: 'none', md: 'flex' },
-                  }}
-                >
-                  Mon compte
-                </Button>
-  
-                <Button
-                  onClick={() => router.push(Routes.Events.ReadAll)}
-                  sx={{
-                    display: { xs: 'none', md: 'flex' },
-                  }}
-                >
-                  Mes événements
-                </Button>
+                {user.rolesNames[0] == "user" &&
+                  <>
+                    <Button
+                      onClick={() => router.push(Routes.Common.Profile)}
+                      sx={{
+                        display: { xs: 'none', md: 'flex' },
+                      }}
+                    >
+                      Mon compte
+                    </Button>
+
+                    <Button
+                      onClick={() => router.push(Routes.Events.ReadAll)}
+                      sx={{
+                        display: { xs: 'none', md: 'flex' },
+                      }}
+                    >
+                      Mes événements
+                    </Button>
+                  </>
+                }
 
                 <Button
                   onClick={() => logout()}

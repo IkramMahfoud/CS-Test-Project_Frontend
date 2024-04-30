@@ -3,7 +3,6 @@ import useEvents from '@modules/events/hooks/api/useEvents';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Routes from '@common/defs/routes';
-import ApiRoutes from '@modules/auth/defs/apiRoutes';
 
 
 export default function ReadEventsAdmin() {
@@ -42,9 +41,10 @@ export default function ReadEventsAdmin() {
           <img style={{ width: "180px", height: "200px" }} src="https://cdn-icons-png.flaticon.com/512/1055/1055650.png" alt="" />
 
           <h1 onClick={() => { router.push(`${Routes.Common.Events}/${e.id}${Routes.Events.ReadOne}`) }}>{e.name}</h1>
+
           <span>{e.description}</span>
+
           <h1>{e.user.name}</h1>
-          <button>now more</button>
           <button onClick={() => deleteEvent(e)}>cancel</button>
           <button onClick={() => { router.push(`${Routes.Common.Events}/${e.id}${Routes.Events.UpdateOne}`) }}>update</button>
 
