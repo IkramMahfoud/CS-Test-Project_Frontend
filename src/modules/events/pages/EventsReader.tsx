@@ -77,70 +77,52 @@ export default function EventsReader() {
       <Button style={{ marginBottom: 20 }} onClick={() => SortDesc()}>trier par récent</Button>
       <Button style={{ marginBottom: 20 }} onClick={() => SortAsc()}> trier par ancien</Button >
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2%' }}>
-        {
-          (events && events.length > 0) ? events.map((e) => (
-            // <div style={{ border: "1px solid black", margin: "10px" }} key={e.id}>
-            //   {/* Assuming e.id is a unique identifier */}
-            //   <img style={{ width: "180px", height: "200px" }} src="https://cdn-icons-png.flaticon.com/512/1055/1055650.png" alt="" />
-            //   <h1 onClick={() => { router.push(`${Routes.Common.Events}/${e.id}${Routes.Events.ReadOne}`) }}>{e.name}</h1>
-            //   <span>{e.description}</span>
-            //   <span>{e.date}</span>
-            //   <h1>{e.user.name}</h1>
-            //   <button>now more</button> <br />
-            //   {
-            //     user.rolesNames[0]=="admin" && <button onClick={()=>deleteEvent(e)}>cancel</button>
-            //   }
-            // </div>
-            <Card sx={{ maxWidth: 280 }}>
-              <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    {e.user.name.charAt(0)}
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label="reserve" onClick={() => { router.push(`${Routes.Common.Events}/${e.id}${Routes.Events.ReadOne}`) }}>
-                    <EventAvailableIcon />
-                  </IconButton>
-                }
-                title={e.name}
-                subheader={e.date}
-              />
-              <CardMedia
-                component="img"
-                height="194"
-                image={event2.src}
-                alt="EVENT IMAGE"
-              />
-              <CardActions disableSpacing>
-                <Typography variant="body2" color="text.secondary">
-                  {
-                    user.rolesNames[0] == "admin" ? <button onClick={() => deleteEvent(e)}>cancel</button> : "plus d'infos"
-                  }
-                </Typography>
-
-                <ExpandMore
-                  expand={expanded}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="show more">
-                  <ExpandMoreIcon />
-                </ExpandMore>
-              </CardActions>
-
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                  <Typography paragraph>
-                    {e.description}
-                  </Typography>
-
-                </CardContent>
-              </Collapse>
-            </Card>
-          ))
-            : <h3 style={{ textAlign: "center" }}>loading ...</h3>
-        }
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+        {events.map((e) => (
+          <Card key={e.id} sx={{ maxWidth: 280 }}>
+            <CardHeader
+              avatar={
+                <Avatar sx={{ bgcolor: red[500] }} aria-label="user">
+                  {e.user.name.charAt(0)}
+                </Avatar>
+              }
+              action={
+                <IconButton aria-label="reserve" onClick={() => { router.push(`${Routes.Common.Events}/${e.id}${Routes.Events.ReadOne}`) }}>
+                  <EventAvailableIcon />
+                </IconButton>
+              }
+              title={e.name}
+              subheader={e.date}
+            />
+            <CardMedia
+              component="img"
+              height="194"
+              image={event2.src} // Assuming 'src' is a property of 'e'
+              alt="EVENT IMAGE"
+            />
+            <CardActions disableSpacing>
+              <Typography variant="body2" color="text.secondary">
+                {user.rolesNames[0] === "admin" ? (
+                  <button onClick={() => deleteEvent(e)}>Cancel</button>
+                ) : (
+                  "Plus d'infos"
+                )}
+              </Typography>
+              <IconButton
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <CardContent>
+                <Typography paragraph>{e.description}</Typography>
+              </CardContent>
+            </Collapse>
+          </Card>
+        ))}
       </div>
 
     </div >
