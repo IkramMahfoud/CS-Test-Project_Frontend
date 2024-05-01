@@ -6,6 +6,7 @@ const Routes: CrudRoutes = {
   ReadAll: prefix+"/readAll",
   CreateOne: prefix + '/create',
   UpdateOne: '/updateOne',
+  Reservations:prefix+'/myreservations',
 };
 
 export default Routes;

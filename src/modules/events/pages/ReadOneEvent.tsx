@@ -76,9 +76,10 @@ export default function ReadOneEvent({ id }) {
       event_id: event && event.id,
     }, { displayProgress: true, displaySuccess: true });
   }
+
+
   return (
     <div>
-
       {event && (
         <>
           {/* show the concel button if you are the owner of the event or admin */}
@@ -124,20 +125,20 @@ export default function ReadOneEvent({ id }) {
                 // sx={{ mt: 1,my:9}}
                 >
 
-                  {AlerdyReserved ? "Déja réservé" : countEvents == event.maxParticipants ? "tous les places sont réservés" : <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                  >
-                    Réserver !
-                  </Button>}
 
 
                 </Box>
+                {AlerdyReserved ? "Déja réservé" : countEvents == event.maxParticipants ? "tous les places sont réservés" : <Button
+                  variant="contained"
+                  onClick={() => reserve()}
+                >
+                  Réserver !
+                </Button>}
               </Box>
             </Grid>
           </Grid>
-
+          {/* {AlerdyReserved ? "Déja réservé" : countEvents == event.maxParticipants ?
+          "tous les places sont réservées" : <button onClick={() => reserve()}>Réserver</button>} */}
         </>
       )
       }

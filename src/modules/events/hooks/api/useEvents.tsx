@@ -1,8 +1,23 @@
 import ApiRoutes from '@common/defs/apiRoutes';
-import useApi, { FetchApiOptions } from '@common/hooks/useApi';
+import { ROLE } from '@modules/permissions/defs/types';
+import { User } from '@modules/users/defs/types';
+import useItems, { UseItems, UseItemsOptions, defaultOptions } from '@common/hooks/useItems';
+import useApi, { ApiOptions, ApiResponse, FetchApiOptions } from '@common/hooks/useApi';
+import { mutate } from 'swr';
+import useSWR from 'swr';
+import { useState } from 'react';
+import useAuth from '@modules/auth/hooks/api/useAuth';
 import { useRouter } from 'next/router';
 import Routes from '@common/defs/routes';
-import Common from '@common/defs/routes';
+
+
+
+// export interface CreateOneInput {
+//   name: string;
+//   email: string;
+//   password: string;
+//   role: ROLE;
+// }
 
 export interface CreateOneEvent {
   name: string;
@@ -105,7 +120,25 @@ const useEvents = (user: any, logout: any): any => {
     return response;
   };
 
-  return { user: ApiRoutes.Auth.Me ?? null, getAllEvents, getOneEvent, createEvent, DeleteEvent, updateEvent, createReservation, getAllReservation };
+  const readMyReservations = async (options?: FetchApiOptions) => {
+    const response = await fetchApi<{ token: string }>(`${ApiRoutes.Reservations.ReadMyReservations}/${user.id}`, {
+      method: "GET",
+      ...options,
+    });
+    return response;
+  };
+
+  const cancelMyReservation = async (id: any, options?: FetchApiOptions) => {
+    console.log("id from the useEvents")
+    console.log(id)
+    const response = await fetchApi<{ token: string }>(`${ApiRoutes.Reservations.DeleteOne}/${id}`, {
+      method: "DELETE",
+      ...options,
+    });
+    router.push(Routes.Common.Home)
+  };
+
+  return { user: ApiRoutes.Auth.Me ?? null, getAllEvents, getOneEvent, createEvent, DeleteEvent, updateEvent, createReservation, getAllReservation, readMyReservations, cancelMyReservation };
 };
 
 export default useEvents;

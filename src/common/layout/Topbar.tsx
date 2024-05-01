@@ -252,6 +252,14 @@ const Topbar = () => {
                 {user.rolesNames[0] == "user" &&
                   <>
                     <Button
+                        onClick={() => router.push(Routes.Events.Reservations)}
+                        sx={{
+                          display: { xs: 'none', md: 'flex' },
+                        }}
+                      >
+                        My reservations
+                    </Button>
+                    <Button
                       onClick={() => router.push(Routes.Common.Profile)}
                       sx={{
                         display: { xs: 'none', md: 'flex' },

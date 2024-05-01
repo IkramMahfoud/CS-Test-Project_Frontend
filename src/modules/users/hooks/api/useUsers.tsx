@@ -84,7 +84,7 @@ const useUsers = (use,logout): AuthData => {
 
   };
    
-  return { user: ApiRoutes.Auth.me ?? null, updateProfile };
+  return { user: ApiRoutes.Auth.Me ?? null, updateProfile };
 };
 
 export default useUsers;
